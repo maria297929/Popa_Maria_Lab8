@@ -30,20 +30,20 @@ namespace Popa_Maria_Lab8.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book.Include(b => b.Publisher).Include(b => b.BookCategories).ThenInclude(b => b.Category).AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
+            Book = await _context.Book
+                .Include(b => b.Publisher)
+                .Include(b => b.BookCategories).ThenInclude(b => b.Category)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (Book == null)
             {
                 return NotFound();
             }
-            //apelam PopulateAssignedCategoryData pentru o obtine informatiile necesare checkbox-
-            //urilor folosind clasa AssignedCategoryData
             PopulateAssignedCategoryData(_context, Book);
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? id,string[]selectedCategories)
         {
             if (id == null)
@@ -69,8 +69,7 @@ namespace Popa_Maria_Lab8.Pages.Books
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-            //Apelam UpdateBookCategories pentru a aplica informatiile din checkboxuri la entitatea Books care
-            //este editata
+
             UpdateBookCategories(_context, selectedCategories, bookToUpdate);
             PopulateAssignedCategoryData(_context, bookToUpdate);
             return Page();

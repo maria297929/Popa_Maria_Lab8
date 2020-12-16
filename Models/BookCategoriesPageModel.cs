@@ -10,12 +10,10 @@ namespace Popa_Maria_Lab8.Models
     public class BookCategoriesPageModel:PageModel
     {
         public List<AssignedCategoryData> AssignedCategoryDataList;
-        public void PopulateAssignedCategoryData(Popa_Maria_Lab8Context context,
-        Book book)
+        public void PopulateAssignedCategoryData(Popa_Maria_Lab8Context context, Book book)
         {
             var allCategories = context.Category;
-            var bookCategories = new HashSet<int>(
-            book.BookCategories.Select(c => c.BookID));
+            var bookCategories = new HashSet<int>(book.BookCategories.Select(c => c.BookID));
             AssignedCategoryDataList = new List<AssignedCategoryData>();
             foreach (var cat in allCategories)
             {
