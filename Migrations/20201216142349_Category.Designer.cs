@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Popa_Maria_Lab8.Data;
 
 namespace Popa_Maria_Lab8.Migrations
 {
     [DbContext(typeof(Popa_Maria_Lab8Context))]
-    partial class Popa_Maria_Lab8ContextModelSnapshot : ModelSnapshot
+    [Migration("20201216142349_Category")]
+    partial class Category
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
